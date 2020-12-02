@@ -81,28 +81,28 @@ main(int argc, const char **argv) {
 
     group = ospNewGroup();
     ospSetParam(group, "geometry", OSP_DATA, &(OSPData){ ospNewSharedData(
-        (OSPObject[]){
+        (OSPGeometricModel[]){
             model,
-        }, OSP_OBJECT, 1, 0, 1, 0, 1, 0) });
+        }, OSP_GEOMETRIC_MODEL, 1, 0, 1, 0, 1, 0) });
     ospCommit(group);
 
     instance = ospNewInstance(group);
     ospCommit(instance);
 
-    light = ospNewLight("sphere");
-    ospSetParam(light, "position", OSP_VEC3F, (float[]){ 0.5, 0.5, 0.5 });
-    ospSetParam(light, "radius", OSP_FLOAT, (float[]){ 0.5 });
+    light = ospNewLight("ambient");
+    //ospSetParam(light, "position", OSP_VEC3F, (float[]){ 0.5, 0.5, 0.5 });
+    //ospSetParam(light, "radius", OSP_FLOAT, (float[]){ 0.5 });
     ospCommit(light);
 
     world = ospNewWorld();
     ospSetParam(world, "instance", OSP_DATA, &(OSPData){ ospNewSharedData(
-        (OSPObject[]){
+        (OSPInstance[]){
             instance,
-        }, OSP_OBJECT, 1, 0, 1, 0, 1, 0) });
+        }, OSP_INSTANCE, 1, 0, 1, 0, 1, 0) });
     ospSetParam(world, "light", OSP_DATA, &(OSPData){ ospNewSharedData(
-        (OSPObject[]){
+        (OSPLight[]){
             light,
-        }, OSP_OBJECT, 1, 0, 1, 0, 1, 0) });
+        }, OSP_LIGHT, 1, 0, 1, 0, 1, 0) });
     ospCommit(world);
 
     renderer = ospNewRenderer("pathtracer");
