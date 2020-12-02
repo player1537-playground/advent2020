@@ -11,6 +11,8 @@ void writePPM(const char *fileName,
               const int ysize,
               const uint32_t *pixel)
 {
+    fprintf(stderr, "Writing to %s\n", fileName);
+
     FILE *file = fopen(fileName, "wb");
     if (!file) {
         fprintf(stderr, "fopen('%s', 'wb') failed: %d", fileName, errno);
